@@ -38,15 +38,13 @@ public class Movimentacao implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Movimentacao(Integer id, String tipo, String localidade, Timestamp data, List<Gabinete> gabinetes,
-			List<Mouse> mouses) {
+	public Movimentacao(Integer id, String tipo, String localidade, Timestamp data) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.localidade = localidade;
 		this.data = data;
-		this.gabinetes = gabinetes;
-		this.mouses = mouses;
+	
 	}
 
 	public Integer getId() {
