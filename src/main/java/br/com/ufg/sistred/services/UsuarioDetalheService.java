@@ -16,7 +16,7 @@ import br.com.ufg.sistred.security.UsuarioDetalhe;
 /**
  * 
  * @author Ericson de Castro
- * @Descricao: Esse é o serviço padrão do SpringSecurity utilizado para consulta
+ * @Descricao: Essa classe é o serviço padrão do SpringSecurity utilizada para consulta
  *             e validação da senha do usuário.
  */
 @Component
