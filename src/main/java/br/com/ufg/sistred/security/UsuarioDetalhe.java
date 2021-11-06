@@ -17,6 +17,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class UsuarioDetalhe implements UserDetails {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final Optional<Usuario> usuario;
 
 	public UsuarioDetalhe(Optional<Usuario> usuario) {

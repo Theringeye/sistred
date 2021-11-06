@@ -27,8 +27,8 @@ import java.util.Date;
  */
 public class JWTAutenticarFiltro extends UsernamePasswordAuthenticationFilter {
 
-	//tempo em milisegundos
-	public static final int TOKEN_EXPIRA = 700_000;
+	// tempo em milisegundos
+	public static final int TOKEN_EXPIRA = 60_000;
 	// Esse GUID deve ser adicionada em arquivo de configuração
 	public static final String TOKEN_SENHA = "463408a1-54c9-4307-bb1c-6cced559f5a7";
 
@@ -70,10 +70,10 @@ public class JWTAutenticarFiltro extends UsernamePasswordAuthenticationFilter {
 		// Aqui acontece a geração do token
 		String token = JWT.create().withSubject(usuarioData.getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRA))
-				//essa parte é a parte em que o token é assinado.
+				// essa parte é a parte em que o token é assinado.
 				.sign(Algorithm.HMAC512(TOKEN_SENHA));
 
-		//Aqui o token é enviado ao usuário. Registrado no corpo da página
+		// Aqui o token é enviado ao usuário. Registrado no corpo da página
 		response.getWriter().write(token);
 		response.getWriter().flush();
 	}
