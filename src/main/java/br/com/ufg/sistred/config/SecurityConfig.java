@@ -2,25 +2,6 @@ package br.com.ufg.sistred.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import br.com.ufg.sistred.security.JWTAutenticarFiltro;
-import br.com.ufg.sistred.security.JwtRequestFilter;
-import br.com.ufg.sistred.security.JwtAuthenticationEntryPoint;
-import br.com.ufg.sistred.services.UsuarioDetalheService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -29,10 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import br.com.ufg.sistred.security.JwtAuthenticationEntryPoint;
+import br.com.ufg.sistred.security.JwtRequestFilter;
+import br.com.ufg.sistred.services.UsuarioDetalheService;
 
 /**
  * 
@@ -77,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// Não cheque essas requisições
 				.authorizeRequests()
-				.antMatchers("/usuario/listarTodos", "/usuario", "/login", "/questions/paged",
+				.antMatchers("/login", "/questions/paged",
 						"/questions/sorted", "/questions", "/authenticate", "/v2/api-docs", "/configuration/ui",
 						"/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**")
 				.permitAll().
