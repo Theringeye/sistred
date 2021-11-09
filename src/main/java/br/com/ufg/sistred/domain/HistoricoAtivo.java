@@ -1,9 +1,6 @@
 package br.com.ufg.sistred.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -12,12 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Movimentacao implements Serializable {
+public class HistoricoAtivo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,33 +19,20 @@ public class Movimentacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String tipo;
+	private String situacao;
 
-	private String localidade;
-
-	private Timestamp data;
-
-	@JsonIgnore
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "gabinete_id")
 	private Gabinete gabinete;
 
-	@JsonIgnore
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "mouse_id")
 	private Mouse mouse;
 
-	public Movimentacao() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Movimentacao(Integer id, String tipo, String localidade, Timestamp data, Gabinete gabinete, Mouse mouse) {
+	public HistoricoAtivo(Integer id, String situacao, Gabinete gabinete, Mouse mouse) {
 		super();
 		this.id = id;
-		this.tipo = tipo;
-		this.localidade = localidade;
-		this.data = data;
+		this.situacao = situacao;
 		this.gabinete = gabinete;
 		this.mouse = mouse;
 	}
@@ -64,28 +45,12 @@ public class Movimentacao implements Serializable {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getSituacao() {
+		return situacao;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getLocalidade() {
-		return localidade;
-	}
-
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
-	}
-
-	public Timestamp getData() {
-		return data;
-	}
-
-	public void setData(Timestamp data) {
-		this.data = data;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
 	public Gabinete getGabinete() {
@@ -104,10 +69,6 @@ public class Movimentacao implements Serializable {
 		this.mouse = mouse;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -121,7 +82,7 @@ public class Movimentacao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Movimentacao other = (Movimentacao) obj;
+		HistoricoAtivo other = (HistoricoAtivo) obj;
 		return Objects.equals(id, other.id);
 	}
 

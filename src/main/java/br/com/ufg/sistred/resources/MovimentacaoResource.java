@@ -20,7 +20,7 @@ import br.com.ufg.sistred.services.MovimentacaoService;
  * 
  */
 @RestController
-@RequestMapping(value = "/movimentacoes")
+@RequestMapping(value = "/movimentacao")
 public class MovimentacaoResource {
 
 	@Autowired

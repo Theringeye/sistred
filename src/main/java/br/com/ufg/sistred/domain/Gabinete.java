@@ -1,14 +1,18 @@
 package br.com.ufg.sistred.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,19 +30,17 @@ public class Gabinete implements Serializable {
 	private String sistema_operacional;
 	private String disco_rigido;
 	private String licenca;
+	private String patrimonio;
 
-	@JsonIgnore
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "movimentacao_id")
-	private Movimentacao movimentacao;
+	@OneToMany(mappedBy = "gabinete")
+	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
-	public Gabinete() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@OneToMany(mappedBy = "gabinete", fetch = FetchType.LAZY)
+	private List<HistoricoAtivo> listaHistoricoAtivo = new ArrayList<>();
 
 	public Gabinete(Integer id, String estado, String processador, String memoria, String sistema_operacional,
-			String disco_rigido, String licenca, Movimentacao movimentacao) {
+			String disco_rigido, String licenca, String patrimonio, List<Movimentacao> listaMovimentacao,
+			List<HistoricoAtivo> listaHistoricoAtivo) {
 		super();
 		this.id = id;
 		this.estado = estado;
@@ -47,7 +49,9 @@ public class Gabinete implements Serializable {
 		this.sistema_operacional = sistema_operacional;
 		this.disco_rigido = disco_rigido;
 		this.licenca = licenca;
-		this.movimentacao = movimentacao;
+		this.patrimonio = patrimonio;
+		this.listaMovimentacao = listaMovimentacao;
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
 	public Integer getId() {
@@ -106,12 +110,28 @@ public class Gabinete implements Serializable {
 		this.licenca = licenca;
 	}
 
-	public Movimentacao getMovimentacao() {
-		return movimentacao;
+	public String getPatrimonio() {
+		return patrimonio;
 	}
 
-	public void setMovimentacao(Movimentacao movimentacao) {
-		this.movimentacao = movimentacao;
+	public void setPatrimonio(String patrimonio) {
+		this.patrimonio = patrimonio;
+	}
+
+	public List<HistoricoAtivo> getListaHistoricoAtivo() {
+		return listaHistoricoAtivo;
+	}
+
+	public void setListaHistoricoAtivo(List<HistoricoAtivo> listaHistoricoAtivo) {
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
+	}
+
+	public List<Movimentacao> getListaMovimentacao() {
+		return listaMovimentacao;
+	}
+
+	public void setListaMovimentacao(List<Movimentacao> listaMovimentacao) {
+		this.listaMovimentacao = listaMovimentacao;
 	}
 
 	@Override

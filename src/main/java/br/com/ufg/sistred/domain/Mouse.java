@@ -1,21 +1,24 @@
 package br.com.ufg.sistred.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Mouse implements Serializable{
+public class Mouse implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -24,24 +27,22 @@ public class Mouse implements Serializable{
 	private String fabricante;
 	private String codigo_identificacao;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "movimentacao_id")
-	private Movimentacao movimentacao;
+	@OneToMany(mappedBy = "gabinete")
+	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
-	public Mouse() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@OneToMany(mappedBy = "mouse", fetch = FetchType.LAZY)
+	private List<HistoricoAtivo> historicoAtivo = new ArrayList<>();
 
 	public Mouse(Integer id, String estado, String modelo, String fabricante, String codigo_identificacao,
-			Movimentacao movimentacao) {
+			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> historicoAtivo) {
 		super();
 		this.id = id;
 		this.estado = estado;
 		this.modelo = modelo;
 		this.fabricante = fabricante;
 		this.codigo_identificacao = codigo_identificacao;
-		this.movimentacao = movimentacao;
+		this.listaMovimentacao = listaMovimentacao;
+		this.historicoAtivo = historicoAtivo;
 	}
 
 	public Integer getId() {
@@ -84,12 +85,20 @@ public class Mouse implements Serializable{
 		this.codigo_identificacao = codigo_identificacao;
 	}
 
-	public Movimentacao getMovimentacao() {
-		return movimentacao;
+	public List<Movimentacao> getListaMovimentacao() {
+		return listaMovimentacao;
 	}
 
-	public void setMovimentacao(Movimentacao movimentacao) {
-		this.movimentacao = movimentacao;
+	public void setListaMovimentacao(List<Movimentacao> listaMovimentacao) {
+		this.listaMovimentacao = listaMovimentacao;
+	}
+
+	public List<HistoricoAtivo> getHistoricoAtivo() {
+		return historicoAtivo;
+	}
+
+	public void setHistoricoAtivo(List<HistoricoAtivo> historicoAtivo) {
+		this.historicoAtivo = historicoAtivo;
 	}
 
 	@Override
@@ -108,7 +117,5 @@ public class Mouse implements Serializable{
 		Mouse other = (Mouse) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
 }
