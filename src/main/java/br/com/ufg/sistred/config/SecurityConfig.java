@@ -1,5 +1,6 @@
 package br.com.ufg.sistred.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Bean
+	public ModelMapper modelMapper() {
+
+		return new ModelMapper();
+	}
 
 	@Bean
 	@Override
@@ -70,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		//httpSecurity.httpBasic().disable();
 	}
 
 }

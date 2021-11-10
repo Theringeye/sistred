@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -32,11 +33,18 @@ public class Gabinete implements Serializable {
 	private String licenca;
 	private String patrimonio;
 
-	@OneToMany(mappedBy = "gabinete")
+	@ManyToMany(mappedBy = "listaGabinete")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
 	@OneToMany(mappedBy = "gabinete", fetch = FetchType.LAZY)
 	private List<HistoricoAtivo> listaHistoricoAtivo = new ArrayList<>();
+
+	
+	
+	public Gabinete() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Gabinete(Integer id, String estado, String processador, String memoria, String sistema_operacional,
 			String disco_rigido, String licenca, String patrimonio, List<Movimentacao> listaMovimentacao,

@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,33 +30,44 @@ public class Movimentacao implements Serializable {
 
 	private String tipo;
 
-	private String localidade;
+	private String origem;
+
+	private String destino;
 
 	private Timestamp data;
 
-	@JsonIgnore
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "gabinete_id")
-	private Gabinete gabinete;
+	private String observacao;
 
 	@JsonIgnore
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "mouse_id")
-	private Mouse mouse;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "responsavelDepartamentoOrgao_id")
+	private ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Gabinete", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "gabinete_id"))
+	private List<Gabinete> listaGabinete = new ArrayList<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Mouse", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "mouse_id"))
+	private List<Mouse> listaMouse = new ArrayList<>();
 
 	public Movimentacao() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Movimentacao(Integer id, String tipo, String localidade, Timestamp data, Gabinete gabinete, Mouse mouse) {
+	public Movimentacao(Integer id, String tipo, String origem, String destino, Timestamp data, String observacao,
+			ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao, List<Gabinete> listaGabinete,
+			List<Mouse> listaMouse) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
-		this.localidade = localidade;
+		this.origem = origem;
+		this.destino = destino;
 		this.data = data;
-		this.gabinete = gabinete;
-		this.mouse = mouse;
+		this.observacao = observacao;
+		this.responsavelDepartamentoOrgao = responsavelDepartamentoOrgao;
+		this.listaGabinete = listaGabinete;
+		this.listaMouse = listaMouse;
 	}
 
 	public Integer getId() {
@@ -72,12 +86,28 @@ public class Movimentacao implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getLocalidade() {
-		return localidade;
+	public String getOrigem() {
+		return origem;
 	}
 
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+
+	public String getDestino() {
+		return destino;
+	}
+
+	public void setDestino(String destino) {
+		this.destino = destino;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public Timestamp getData() {
@@ -88,20 +118,36 @@ public class Movimentacao implements Serializable {
 		this.data = data;
 	}
 
-	public Gabinete getGabinete() {
-		return gabinete;
+	public ResponsavelDepartamentoOrgao getResponsavelDepartamentoOrgao() {
+		return responsavelDepartamentoOrgao;
 	}
 
-	public void setGabinete(Gabinete gabinete) {
-		this.gabinete = gabinete;
+	public void setResponsavelDepartamentoOrgao(ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao) {
+		this.responsavelDepartamentoOrgao = responsavelDepartamentoOrgao;
 	}
 
-	public Mouse getMouse() {
-		return mouse;
+	public List<Gabinete> getListaGabinete() {
+		return listaGabinete;
 	}
 
-	public void setMouse(Mouse mouse) {
-		this.mouse = mouse;
+	public void setListaGabinete(List<Gabinete> listaGabinete) {
+		this.listaGabinete = listaGabinete;
+	}
+
+	public List<Mouse> getListaMouse() {
+		return listaMouse;
+	}
+
+	public void setListaMouse(List<Mouse> listaMouse) {
+		this.listaMouse = listaMouse;
+	}
+
+	public ResponsavelDepartamentoOrgao getResponsavelDepartamento() {
+		return responsavelDepartamentoOrgao;
+	}
+
+	public void setResponsavelDepartamento(ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao) {
+		this.responsavelDepartamentoOrgao = responsavelDepartamentoOrgao;
 	}
 
 	public static long getSerialversionuid() {

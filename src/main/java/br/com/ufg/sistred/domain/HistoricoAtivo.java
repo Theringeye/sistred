@@ -1,6 +1,7 @@
 package br.com.ufg.sistred.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ public class HistoricoAtivo implements Serializable {
 
 	private String situacao;
 
+	private Timestamp data;
+
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "gabinete_id")
 	private Gabinete gabinete;
@@ -29,10 +32,16 @@ public class HistoricoAtivo implements Serializable {
 	@JoinColumn(name = "mouse_id")
 	private Mouse mouse;
 
-	public HistoricoAtivo(Integer id, String situacao, Gabinete gabinete, Mouse mouse) {
+	public HistoricoAtivo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public HistoricoAtivo(Integer id, String situacao, Timestamp data, Gabinete gabinete, Mouse mouse) {
 		super();
 		this.id = id;
 		this.situacao = situacao;
+		this.data = data;
 		this.gabinete = gabinete;
 		this.mouse = mouse;
 	}
@@ -51,6 +60,14 @@ public class HistoricoAtivo implements Serializable {
 
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
+	}
+
+	public Timestamp getData() {
+		return data;
+	}
+
+	public void setData(Timestamp data) {
+		this.data = data;
 	}
 
 	public Gabinete getGabinete() {

@@ -25,6 +25,18 @@ public class Usuario implements Serializable {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 
+	public Usuario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Usuario(Integer id, String login, String password) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.password = password;
+	}
+
 	public Integer getId() {
 		return id;
 	}

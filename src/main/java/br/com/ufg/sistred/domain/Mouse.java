@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,11 +28,16 @@ public class Mouse implements Serializable {
 	private String fabricante;
 	private String codigo_identificacao;
 
-	@OneToMany(mappedBy = "gabinete")
+	@ManyToMany(mappedBy = "listaMouse")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mouse", fetch = FetchType.LAZY)
-	private List<HistoricoAtivo> historicoAtivo = new ArrayList<>();
+	private List<HistoricoAtivo> listaHistoricoAtivo = new ArrayList<>();
+
+	public Mouse() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Mouse(Integer id, String estado, String modelo, String fabricante, String codigo_identificacao,
 			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> historicoAtivo) {
@@ -42,7 +48,7 @@ public class Mouse implements Serializable {
 		this.fabricante = fabricante;
 		this.codigo_identificacao = codigo_identificacao;
 		this.listaMovimentacao = listaMovimentacao;
-		this.historicoAtivo = historicoAtivo;
+		this.listaHistoricoAtivo = historicoAtivo;
 	}
 
 	public Integer getId() {
@@ -93,12 +99,12 @@ public class Mouse implements Serializable {
 		this.listaMovimentacao = listaMovimentacao;
 	}
 
-	public List<HistoricoAtivo> getHistoricoAtivo() {
-		return historicoAtivo;
+	public List<HistoricoAtivo> getListaHistoricoAtivo() {
+		return listaHistoricoAtivo;
 	}
 
-	public void setHistoricoAtivo(List<HistoricoAtivo> historicoAtivo) {
-		this.historicoAtivo = historicoAtivo;
+	public void setListaHistoricoAtivo(List<HistoricoAtivo> listaHistoricoAtivo) {
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
 	@Override

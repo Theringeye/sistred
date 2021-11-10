@@ -28,7 +28,7 @@ import java.util.Date;
 public class JWTAutenticarFiltro extends UsernamePasswordAuthenticationFilter {
 
 	// tempo em milisegundos
-	public static final int TOKEN_EXPIRA = 60_000;
+	public static final int TOKEN_EXPIRA = 600_000;
 	// Esse GUID deve ser adicionada em arquivo de configuração
 	// public static final String TOKEN_SENHA =
 	// "463408a1-54c9-4307-bb1c-6cced559f5a7";
