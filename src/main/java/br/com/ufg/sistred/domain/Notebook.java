@@ -3,7 +3,6 @@ package br.com.ufg.sistred.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,9 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Gabinete implements Serializable {
+public class Notebook implements Serializable {
 
-	private static final long serialVersionUID = -4693296110568660233L;
+	private static final long serialVersionUID = 1401995331656151584L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -31,35 +31,15 @@ public class Gabinete implements Serializable {
 	private String licenca_so;
 	private String patrimonio;
 
-	@ManyToMany(mappedBy = "listaGabinete")
+	@ManyToMany(mappedBy = "listaNotebook")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
-	@OneToMany(mappedBy = "gabinete", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "notebook", fetch = FetchType.LAZY)
 	private List<HistoricoAtivo> listaHistoricoAtivo = new ArrayList<>();
 
-	public Gabinete() {
+	public Notebook() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Gabinete(Integer id, String processador, String memoria, String tipo_armazenamento,
-			String tamanho_armazenamento, String modelo, String fabricante, String sistema_operacional,
-			String versao_sistema_operacional, String licenca_so, String patrimonio,
-			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
-		super();
-		this.id = id;
-		this.processador = processador;
-		this.memoria = memoria;
-		this.tipo_armazenamento = tipo_armazenamento;
-		this.tamanho_armazenamento = tamanho_armazenamento;
-		this.modelo = modelo;
-		this.fabricante = fabricante;
-		this.sistema_operacional = sistema_operacional;
-		this.versao_sistema_operacional = versao_sistema_operacional;
-		this.licenca_so = licenca_so;
-		this.patrimonio = patrimonio;
-		this.listaMovimentacao = listaMovimentacao;
-		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
 	public Integer getId() {
@@ -164,23 +144,6 @@ public class Gabinete implements Serializable {
 
 	public void setListaHistoricoAtivo(List<HistoricoAtivo> listaHistoricoAtivo) {
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Gabinete other = (Gabinete) obj;
-		return Objects.equals(id, other.id);
 	}
 
 }

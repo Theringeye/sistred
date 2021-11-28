@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,13 +28,9 @@ public class Movimentacao implements Serializable {
 	private Integer id;
 
 	private String tipo;
-
 	private String origem;
-
 	private String destino;
-
 	private Timestamp data;
-
 	private String observacao;
 
 	@JsonIgnore
@@ -50,6 +45,34 @@ public class Movimentacao implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Mouse", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "mouse_id"))
 	private List<Mouse> listaMouse = new ArrayList<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Cabo", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "cabo_id"))
+	private List<Cabo> listaCabo = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_DispositivoProtecao", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "dispositivoProtecao_id"))
+	private List<DispositivoProtecao> listaDispositivoProtecao = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Impressora", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "impressora_id"))
+	private List<Impressora> listaImpressora = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Monitor", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "monitor_id"))
+	private List<Monitor> listaMonitor = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Notebook", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "notebook_id"))
+	private List<Notebook> listaNotebook = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_Teclado", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "teclado_id"))
+	private List<Teclado> listaTeclado = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Movimentacao_DispositivoPortatil", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "dispositivoPortatil_id"))
+	private List<DispositivoPortatil> listaDispositivoPortatil = new ArrayList<>();
 
 	public Movimentacao() {
 		super();

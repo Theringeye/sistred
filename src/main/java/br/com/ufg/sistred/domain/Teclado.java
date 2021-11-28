@@ -3,7 +3,6 @@ package br.com.ufg.sistred.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,39 +13,40 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Mouse implements Serializable {
+public class Teclado implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7919010957833111404L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String estado;
+
+	private String padrao;
 	private String modelo;
 	private String fabricante;
-	private String codigo_identificacao;
+	private String patrimonio;
 
-	@ManyToMany(mappedBy = "listaMouse")
+	@ManyToMany(mappedBy = "listaTeclado")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
-	@OneToMany(mappedBy = "mouse", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "teclado", fetch = FetchType.LAZY)
 	private List<HistoricoAtivo> listaHistoricoAtivo = new ArrayList<>();
 
-	public Mouse() {
+	public Teclado() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Mouse(Integer id, String estado, String modelo, String fabricante, String codigo_identificacao,
-			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> historicoAtivo) {
+	public Teclado(Integer id, String padrao, String modelo, String fabricante, String patrimonio,
+			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
 		super();
 		this.id = id;
-		this.estado = estado;
+		this.padrao = padrao;
 		this.modelo = modelo;
 		this.fabricante = fabricante;
-		this.codigo_identificacao = codigo_identificacao;
+		this.patrimonio = patrimonio;
 		this.listaMovimentacao = listaMovimentacao;
-		this.listaHistoricoAtivo = historicoAtivo;
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
 	public Integer getId() {
@@ -57,12 +57,12 @@ public class Mouse implements Serializable {
 		this.id = id;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getPadrao() {
+		return padrao;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setPadrao(String padrao) {
+		this.padrao = padrao;
 	}
 
 	public String getModelo() {
@@ -81,12 +81,12 @@ public class Mouse implements Serializable {
 		this.fabricante = fabricante;
 	}
 
-	public String getCodigo_identificacao() {
-		return codigo_identificacao;
+	public String getPatrimonio() {
+		return patrimonio;
 	}
 
-	public void setCodigo_identificacao(String codigo_identificacao) {
-		this.codigo_identificacao = codigo_identificacao;
+	public void setPatrimonio(String patrimonio) {
+		this.patrimonio = patrimonio;
 	}
 
 	public List<Movimentacao> getListaMovimentacao() {
@@ -103,23 +103,6 @@ public class Mouse implements Serializable {
 
 	public void setListaHistoricoAtivo(List<HistoricoAtivo> listaHistoricoAtivo) {
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Mouse other = (Mouse) obj;
-		return Objects.equals(id, other.id);
 	}
 
 }

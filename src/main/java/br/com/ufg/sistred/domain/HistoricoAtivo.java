@@ -14,14 +14,16 @@ import javax.persistence.ManyToOne;
 @Entity
 public class HistoricoAtivo implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7073977703044155973L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String situacao;
-
 	private Timestamp data;
 
 	@ManyToOne(optional = true)
@@ -32,18 +34,48 @@ public class HistoricoAtivo implements Serializable {
 	@JoinColumn(name = "mouse_id")
 	private Mouse mouse;
 
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "cabo_id")
+	private Cabo cabo;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "dispositivoProtecao_id")
+	private DispositivoProtecao dispositivoProtecao;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "impressora_id")
+	private Impressora impressora;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "monitor_id")
+	private Monitor monitor;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "notebook_id")
+	private Notebook notebook;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "teclado_id")
+	private Teclado teclado;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "dispositivoPortatil_id")
+	private DispositivoPortatil dispositivoPortatil;
+	
+
 	public HistoricoAtivo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public HistoricoAtivo(Integer id, String situacao, Timestamp data, Gabinete gabinete, Mouse mouse) {
+	public HistoricoAtivo(Integer id, String situacao, Timestamp data, Gabinete gabinete, Mouse mouse, Cabo cabo) {
 		super();
 		this.id = id;
 		this.situacao = situacao;
 		this.data = data;
 		this.gabinete = gabinete;
 		this.mouse = mouse;
+		this.cabo = cabo;
 	}
 
 	public Integer getId() {

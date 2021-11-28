@@ -86,11 +86,11 @@ public class DBService {
 		movimentacaoRepository.saveAll(Arrays.asList(movimentacao2));*/
 		
 
-		HistoricoAtivo historicoGabinete1 = new HistoricoAtivo(null, "funcionando", new Timestamp(0), gabinete1, null);
+		HistoricoAtivo historicoGabinete1 = new HistoricoAtivo(null, "funcionando", new Timestamp(0), gabinete1, null,null);
 		
-		HistoricoAtivo historicoGabinete2 = new HistoricoAtivo(null, "apresentou desfeito", new Timestamp(0), gabinete2, null);
+		HistoricoAtivo historicoGabinete2 = new HistoricoAtivo(null, "apresentou desfeito", new Timestamp(0), gabinete2, null ,null);
 		
-		HistoricoAtivo historicoGabinete3 = new HistoricoAtivo(null, "apresentou desfeito", new Timestamp(0), null, mouse1);
+		HistoricoAtivo historicoGabinete3 = new HistoricoAtivo(null, "apresentou desfeito", new Timestamp(0), null, mouse1,null);
 		
 		
 		historicoAtivoRepository.save(historicoGabinete1);
