@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TecladoDTO extends CommonDTO {
-	
 
-	
 	private String padrao;
 	private List<MovimentacaoDTO> listaMovimentacaoDTO = new ArrayList<>();
 	private List<HistoricoAtivoDTO> listaHistoricoAtivoDTO = new ArrayList<>();
-
-
-
-	
 
 	public String getPadrao() {
 		return padrao;

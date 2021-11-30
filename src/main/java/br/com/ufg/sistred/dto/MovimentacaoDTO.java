@@ -4,31 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import br.com.ufg.sistred.domain.Cabo;
-import br.com.ufg.sistred.domain.DispositivoPortatil;
-import br.com.ufg.sistred.domain.DispositivoProtecao;
-import br.com.ufg.sistred.domain.Gabinete;
-import br.com.ufg.sistred.domain.Impressora;
-import br.com.ufg.sistred.domain.Monitor;
-import br.com.ufg.sistred.domain.Mouse;
-import br.com.ufg.sistred.domain.Notebook;
-import br.com.ufg.sistred.domain.Teclado;
-import br.com.ufg.sistred.domain.TecnicoAdministrativo;
-import br.com.ufg.sistred.domain.UnidadeOrgao;
-import lombok.Getter;
-import lombok.Setter;
-
 public class MovimentacaoDTO {
 
 	private Integer id;
@@ -66,9 +41,6 @@ public class MovimentacaoDTO {
 	private List<TecladoDTO> listaTecladoDTO = new ArrayList<>();
 
 	private List<DispositivoPortatilDTO> listaDispositivoPortatilDTO = new ArrayList<>();
-	
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -93,7 +65,6 @@ public class MovimentacaoDTO {
 	public void setEntrada_saida(boolean entrada_saida) {
 		this.entrada_saida = entrada_saida;
 	}
-
 
 	public UnidadeOrgaoDTO getUnidadeOrgaoOrigemDTO() {
 		return unidadeOrgaoOrigemDTO;
@@ -126,7 +97,6 @@ public class MovimentacaoDTO {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
 
 	public TecnicoAdministrativoDTO getResponsavelTecnicoDTO() {
 		return responsavelTecnicoDTO;
@@ -216,9 +186,4 @@ public class MovimentacaoDTO {
 		this.listaDispositivoPortatilDTO = listaDispositivoPortatilDTO;
 	}
 
-	
-	
-	
-	
-	
 }

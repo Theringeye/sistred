@@ -3,9 +3,8 @@ package br.com.ufg.sistred.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotebookDTO extends CommonDTO{
+public class NotebookDTO extends CommonDTO {
 
-	
 	private String processador;
 	private String memoria;
 	private String tipo_armazenamento;
@@ -15,10 +14,6 @@ public class NotebookDTO extends CommonDTO{
 	private String licenca_so;
 	private List<MovimentacaoDTO> listaMovimentacaoDTO = new ArrayList<>();
 	private List<HistoricoAtivoDTO> listaHistoricoAtivoDTO = new ArrayList<>();
-
-	
-	
-	
 
 	public String getProcessador() {
 		return processador;

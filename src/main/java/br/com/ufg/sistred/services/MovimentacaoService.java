@@ -1,9 +1,7 @@
 package br.com.ufg.sistred.services;
 
-import java.lang.StackWalker.Option;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +72,7 @@ public class MovimentacaoService {
 
 	public MovimentacaoDTO salvar(MovimentacaoDTO movimentacaoDTO) {
 
+		//verificar como os dados serão enviados da aplicação front para decidir como realizar o método salvar
 		Movimentacao movimentacao = modelMapper.map(movimentacaoDTO, Movimentacao.class);
 
 		return converteEntityToDTO(movimentacaoRepository.save(movimentacao));

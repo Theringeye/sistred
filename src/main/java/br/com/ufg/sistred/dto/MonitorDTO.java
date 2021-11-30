@@ -3,19 +3,11 @@ package br.com.ufg.sistred.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.ufg.sistred.domain.HistoricoAtivo;
-import br.com.ufg.sistred.domain.Movimentacao;
+public class MonitorDTO extends CommonDTO {
 
-public class MonitorDTO extends CommonDTO  {
-
-	
 	private String tamanho;
 	private List<MovimentacaoDTO> listaMovimentacaoDTO = new ArrayList<>();
 	private List<HistoricoAtivoDTO> listaHistoricoAtivoDTO = new ArrayList<>();
-	
-	
-
-	
 
 	public String getTamanho() {
 		return tamanho;

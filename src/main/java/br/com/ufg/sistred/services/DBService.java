@@ -3,14 +3,11 @@ package br.com.ufg.sistred.services;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ufg.sistred.domain.Cabo;
-import br.com.ufg.sistred.domain.DispositivoPortatil;
 import br.com.ufg.sistred.domain.Gabinete;
 import br.com.ufg.sistred.domain.HistoricoAtivo;
 import br.com.ufg.sistred.domain.Mouse;

@@ -3,14 +3,11 @@ package br.com.ufg.sistred.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DispositivoProtecaoDTO extends CommonDTO  {
+public class DispositivoProtecaoDTO extends CommonDTO {
 
-	
 	private String tipo;
 	private List<MovimentacaoDTO> listaMovimentacaoDTO = new ArrayList<>();
 	private List<HistoricoAtivoDTO> listaHistoricoAtivoDTO = new ArrayList<>();
-
-
 
 	public String getTipo() {
 		return tipo;

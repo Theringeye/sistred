@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.ufg.sistred.domain.Gabinete;
-import br.com.ufg.sistred.domain.Movimentacao;
 
 @Repository
 public interface GabineteRepository extends JpaRepository<Gabinete, Integer> {
