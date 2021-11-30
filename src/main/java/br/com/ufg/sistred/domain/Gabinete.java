@@ -14,22 +14,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Gabinete implements Serializable {
+public class Gabinete extends Common implements Serializable {
 
 	private static final long serialVersionUID = -4693296110568660233L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+
 	private String processador;
 	private String memoria;
 	private String tipo_armazenamento;
 	private String tamanho_armazenamento;
-	private String modelo;
-	private String fabricante;
 	private String sistema_operacional;
 	private String versao_sistema_operacional;
 	private String licenca_so;
-	private String patrimonio;
 
 	@ManyToMany(mappedBy = "listaGabinete")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
@@ -40,34 +35,6 @@ public class Gabinete implements Serializable {
 	public Gabinete() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Gabinete(Integer id, String processador, String memoria, String tipo_armazenamento,
-			String tamanho_armazenamento, String modelo, String fabricante, String sistema_operacional,
-			String versao_sistema_operacional, String licenca_so, String patrimonio,
-			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
-		super();
-		this.id = id;
-		this.processador = processador;
-		this.memoria = memoria;
-		this.tipo_armazenamento = tipo_armazenamento;
-		this.tamanho_armazenamento = tamanho_armazenamento;
-		this.modelo = modelo;
-		this.fabricante = fabricante;
-		this.sistema_operacional = sistema_operacional;
-		this.versao_sistema_operacional = versao_sistema_operacional;
-		this.licenca_so = licenca_so;
-		this.patrimonio = patrimonio;
-		this.listaMovimentacao = listaMovimentacao;
-		this.listaHistoricoAtivo = listaHistoricoAtivo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getProcessador() {
@@ -102,22 +69,6 @@ public class Gabinete implements Serializable {
 		this.tamanho_armazenamento = tamanho_armazenamento;
 	}
 
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public String getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(String fabricante) {
-		this.fabricante = fabricante;
-	}
-
 	public String getSistema_operacional() {
 		return sistema_operacional;
 	}
@@ -142,14 +93,6 @@ public class Gabinete implements Serializable {
 		this.licenca_so = licenca_so;
 	}
 
-	public String getPatrimonio() {
-		return patrimonio;
-	}
-
-	public void setPatrimonio(String patrimonio) {
-		this.patrimonio = patrimonio;
-	}
-
 	public List<Movimentacao> getListaMovimentacao() {
 		return listaMovimentacao;
 	}
@@ -166,21 +109,20 @@ public class Gabinete implements Serializable {
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public Gabinete(String processador, String memoria, String tipo_armazenamento, String tamanho_armazenamento,
+			String sistema_operacional, String versao_sistema_operacional, String licenca_so,
+			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
+		super();
+		this.processador = processador;
+		this.memoria = memoria;
+		this.tipo_armazenamento = tipo_armazenamento;
+		this.tamanho_armazenamento = tamanho_armazenamento;
+		this.sistema_operacional = sistema_operacional;
+		this.versao_sistema_operacional = versao_sistema_operacional;
+		this.licenca_so = licenca_so;
+		this.listaMovimentacao = listaMovimentacao;
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Gabinete other = (Gabinete) obj;
-		return Objects.equals(id, other.id);
-	}
 
 }

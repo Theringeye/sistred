@@ -13,17 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import net.bytebuddy.agent.builder.AgentBuilder.Identified.Extendable;
+
 @Entity
-public class Mouse implements Serializable {
+public class Mouse extends Common implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7110734384444306869L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String estado;
-	private String modelo;
-	private String fabricante;
 	private String codigo_identificacao;
 
 	@ManyToMany(mappedBy = "listaMouse")
@@ -37,48 +33,12 @@ public class Mouse implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Mouse(Integer id, String estado, String modelo, String fabricante, String codigo_identificacao,
-			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> historicoAtivo) {
+	public Mouse(String codigo_identificacao, List<Movimentacao> listaMovimentacao,
+			List<HistoricoAtivo> listaHistoricoAtivo) {
 		super();
-		this.id = id;
-		this.estado = estado;
-		this.modelo = modelo;
-		this.fabricante = fabricante;
 		this.codigo_identificacao = codigo_identificacao;
 		this.listaMovimentacao = listaMovimentacao;
-		this.listaHistoricoAtivo = historicoAtivo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public String getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(String fabricante) {
-		this.fabricante = fabricante;
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
 	public String getCodigo_identificacao() {
@@ -103,23 +63,6 @@ public class Mouse implements Serializable {
 
 	public void setListaHistoricoAtivo(List<HistoricoAtivo> listaHistoricoAtivo) {
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Mouse other = (Mouse) obj;
-		return Objects.equals(id, other.id);
 	}
 
 }

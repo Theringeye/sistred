@@ -21,22 +21,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Movimentacao implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1097013479949292690L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String tipo;
-	private String origem;
-	private String destino;
+	private boolean entrada_saida;
+
+	@ManyToOne
+	@JoinColumn(name = "unidadeOrgaoOrigem_id")
+	private UnidadeOrgao unidadeOrgaoOrigem;
+
+	@ManyToOne
+	@JoinColumn(name = "unidadeOrgaoDestino_id")
+	private UnidadeOrgao unidadeOrgaoDestino;
+
 	private Timestamp data;
 	private String observacao;
-
 	@JsonIgnore
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "responsavelDepartamentoOrgao_id")
-	private ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "responsavelTecnico_id")
+	private TecnicoAdministrativo responsavelTecnico;
+	@JsonIgnore
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "responsavelAdministrativo_id")
+	private TecnicoAdministrativo responsavelAdministrativo;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Gabinete", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "gabinete_id"))
@@ -49,27 +60,27 @@ public class Movimentacao implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Cabo", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "cabo_id"))
 	private List<Cabo> listaCabo = new ArrayList<>();
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_DispositivoProtecao", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "dispositivoProtecao_id"))
 	private List<DispositivoProtecao> listaDispositivoProtecao = new ArrayList<>();
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Impressora", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "impressora_id"))
 	private List<Impressora> listaImpressora = new ArrayList<>();
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Monitor", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "monitor_id"))
 	private List<Monitor> listaMonitor = new ArrayList<>();
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Notebook", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "notebook_id"))
 	private List<Notebook> listaNotebook = new ArrayList<>();
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Teclado", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "teclado_id"))
 	private List<Teclado> listaTeclado = new ArrayList<>();
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_DispositivoPortatil", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "dispositivoPortatil_id"))
 	private List<DispositivoPortatil> listaDispositivoPortatil = new ArrayList<>();
@@ -78,19 +89,32 @@ public class Movimentacao implements Serializable {
 		super();
 	}
 
-	public Movimentacao(Integer id, String tipo, String origem, String destino, Timestamp data, String observacao,
-			ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao, List<Gabinete> listaGabinete,
-			List<Mouse> listaMouse) {
+	public Movimentacao(Integer id, String tipo, boolean entrada_saida, UnidadeOrgao unidadeOrgaoOrigem,
+			UnidadeOrgao unidadeOrgaoDestino, Timestamp data, String observacao,
+			TecnicoAdministrativo responsavelTecnico, TecnicoAdministrativo responsavelAdministrativo,
+			List<Gabinete> listaGabinete, List<Mouse> listaMouse, List<Cabo> listaCabo,
+			List<DispositivoProtecao> listaDispositivoProtecao, List<Impressora> listaImpressora,
+			List<Monitor> listaMonitor, List<Notebook> listaNotebook, List<Teclado> listaTeclado,
+			List<DispositivoPortatil> listaDispositivoPortatil) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
-		this.origem = origem;
-		this.destino = destino;
+		this.entrada_saida = entrada_saida;
+		this.unidadeOrgaoOrigem = unidadeOrgaoOrigem;
+		this.unidadeOrgaoDestino = unidadeOrgaoDestino;
 		this.data = data;
 		this.observacao = observacao;
-		this.responsavelDepartamentoOrgao = responsavelDepartamentoOrgao;
+		this.responsavelTecnico = responsavelTecnico;
+		this.responsavelAdministrativo = responsavelAdministrativo;
 		this.listaGabinete = listaGabinete;
 		this.listaMouse = listaMouse;
+		this.listaCabo = listaCabo;
+		this.listaDispositivoProtecao = listaDispositivoProtecao;
+		this.listaImpressora = listaImpressora;
+		this.listaMonitor = listaMonitor;
+		this.listaNotebook = listaNotebook;
+		this.listaTeclado = listaTeclado;
+		this.listaDispositivoPortatil = listaDispositivoPortatil;
 	}
 
 	public Integer getId() {
@@ -109,28 +133,28 @@ public class Movimentacao implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getOrigem() {
-		return origem;
+	public boolean isEntrada_saida() {
+		return entrada_saida;
 	}
 
-	public void setOrigem(String origem) {
-		this.origem = origem;
+	public void setEntrada_saida(boolean entrada_saida) {
+		this.entrada_saida = entrada_saida;
 	}
 
-	public String getDestino() {
-		return destino;
+	public UnidadeOrgao getUnidadeOrgaoOrigem() {
+		return unidadeOrgaoOrigem;
 	}
 
-	public void setDestino(String destino) {
-		this.destino = destino;
+	public void setUnidadeOrgaoOrigem(UnidadeOrgao unidadeOrgaoOrigem) {
+		this.unidadeOrgaoOrigem = unidadeOrgaoOrigem;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public UnidadeOrgao getUnidadeOrgaoDestino() {
+		return unidadeOrgaoDestino;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setUnidadeOrgaoDestino(UnidadeOrgao unidadeOrgaoDestino) {
+		this.unidadeOrgaoDestino = unidadeOrgaoDestino;
 	}
 
 	public Timestamp getData() {
@@ -141,12 +165,28 @@ public class Movimentacao implements Serializable {
 		this.data = data;
 	}
 
-	public ResponsavelDepartamentoOrgao getResponsavelDepartamentoOrgao() {
-		return responsavelDepartamentoOrgao;
+	public String getObservacao() {
+		return observacao;
 	}
 
-	public void setResponsavelDepartamentoOrgao(ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao) {
-		this.responsavelDepartamentoOrgao = responsavelDepartamentoOrgao;
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public TecnicoAdministrativo getResponsavelTecnico() {
+		return responsavelTecnico;
+	}
+
+	public void setResponsavelTecnico(TecnicoAdministrativo responsavelTecnico) {
+		this.responsavelTecnico = responsavelTecnico;
+	}
+
+	public TecnicoAdministrativo getResponsavelAdministrativo() {
+		return responsavelAdministrativo;
+	}
+
+	public void setResponsavelAdministrativo(TecnicoAdministrativo responsavelAdministrativo) {
+		this.responsavelAdministrativo = responsavelAdministrativo;
 	}
 
 	public List<Gabinete> getListaGabinete() {
@@ -165,16 +205,60 @@ public class Movimentacao implements Serializable {
 		this.listaMouse = listaMouse;
 	}
 
-	public ResponsavelDepartamentoOrgao getResponsavelDepartamento() {
-		return responsavelDepartamentoOrgao;
+	public List<Cabo> getListaCabo() {
+		return listaCabo;
 	}
 
-	public void setResponsavelDepartamento(ResponsavelDepartamentoOrgao responsavelDepartamentoOrgao) {
-		this.responsavelDepartamentoOrgao = responsavelDepartamentoOrgao;
+	public void setListaCabo(List<Cabo> listaCabo) {
+		this.listaCabo = listaCabo;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<DispositivoProtecao> getListaDispositivoProtecao() {
+		return listaDispositivoProtecao;
+	}
+
+	public void setListaDispositivoProtecao(List<DispositivoProtecao> listaDispositivoProtecao) {
+		this.listaDispositivoProtecao = listaDispositivoProtecao;
+	}
+
+	public List<Impressora> getListaImpressora() {
+		return listaImpressora;
+	}
+
+	public void setListaImpressora(List<Impressora> listaImpressora) {
+		this.listaImpressora = listaImpressora;
+	}
+
+	public List<Monitor> getListaMonitor() {
+		return listaMonitor;
+	}
+
+	public void setListaMonitor(List<Monitor> listaMonitor) {
+		this.listaMonitor = listaMonitor;
+	}
+
+	public List<Notebook> getListaNotebook() {
+		return listaNotebook;
+	}
+
+	public void setListaNotebook(List<Notebook> listaNotebook) {
+		this.listaNotebook = listaNotebook;
+	}
+
+	public List<Teclado> getListaTeclado() {
+		return listaTeclado;
+	}
+
+	public void setListaTeclado(List<Teclado> listaTeclado) {
+		this.listaTeclado = listaTeclado;
+	}
+
+	public List<DispositivoPortatil> getListaDispositivoPortatil() {
+		return listaDispositivoPortatil;
+	}
+
+	public void setListaDispositivoPortatil(List<DispositivoPortatil> listaDispositivoPortatil) {
+		this.listaDispositivoPortatil = listaDispositivoPortatil;
 	}
 
 	@Override

@@ -13,23 +13,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Notebook implements Serializable {
+public class Notebook extends Common implements Serializable {
 
 	private static final long serialVersionUID = 1401995331656151584L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 	private String processador;
 	private String memoria;
 	private String tipo_armazenamento;
 	private String tamanho_armazenamento;
-	private String modelo;
-	private String fabricante;
 	private String sistema_operacional;
 	private String versao_sistema_operacional;
 	private String licenca_so;
-	private String patrimonio;
 
 	@ManyToMany(mappedBy = "listaNotebook")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
@@ -42,12 +36,19 @@ public class Notebook implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public Notebook(String processador, String memoria, String tipo_armazenamento, String tamanho_armazenamento,
+			String sistema_operacional, String versao_sistema_operacional, String licenca_so,
+			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
+		super();
+		this.processador = processador;
+		this.memoria = memoria;
+		this.tipo_armazenamento = tipo_armazenamento;
+		this.tamanho_armazenamento = tamanho_armazenamento;
+		this.sistema_operacional = sistema_operacional;
+		this.versao_sistema_operacional = versao_sistema_operacional;
+		this.licenca_so = licenca_so;
+		this.listaMovimentacao = listaMovimentacao;
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
 	public String getProcessador() {
@@ -82,22 +83,6 @@ public class Notebook implements Serializable {
 		this.tamanho_armazenamento = tamanho_armazenamento;
 	}
 
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public String getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(String fabricante) {
-		this.fabricante = fabricante;
-	}
-
 	public String getSistema_operacional() {
 		return sistema_operacional;
 	}
@@ -120,14 +105,6 @@ public class Notebook implements Serializable {
 
 	public void setLicenca_so(String licenca_so) {
 		this.licenca_so = licenca_so;
-	}
-
-	public String getPatrimonio() {
-		return patrimonio;
-	}
-
-	public void setPatrimonio(String patrimonio) {
-		this.patrimonio = patrimonio;
 	}
 
 	public List<Movimentacao> getListaMovimentacao() {

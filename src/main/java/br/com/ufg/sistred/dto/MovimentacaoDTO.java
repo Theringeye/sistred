@@ -4,10 +4,30 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.ufg.sistred.domain.Cabo;
+import br.com.ufg.sistred.domain.DispositivoPortatil;
+import br.com.ufg.sistred.domain.DispositivoProtecao;
+import br.com.ufg.sistred.domain.Gabinete;
+import br.com.ufg.sistred.domain.Impressora;
+import br.com.ufg.sistred.domain.Monitor;
 import br.com.ufg.sistred.domain.Mouse;
+import br.com.ufg.sistred.domain.Notebook;
+import br.com.ufg.sistred.domain.Teclado;
+import br.com.ufg.sistred.domain.TecnicoAdministrativo;
+import br.com.ufg.sistred.domain.UnidadeOrgao;
 import lombok.Getter;
 import lombok.Setter;
-
 
 public class MovimentacaoDTO {
 
@@ -15,17 +35,40 @@ public class MovimentacaoDTO {
 
 	private String tipo;
 
-	private String origem;
+	private boolean entrada_saida;
 
-	private String destino;
+	private UnidadeOrgaoDTO unidadeOrgaoOrigemDTO;
+
+	private UnidadeOrgaoDTO unidadeOrgaoDestinoDTO;
 
 	private Timestamp data;
 
 	private String observacao;
 
-	private ArrayList<GabineteDTO> listaGabineteDTO = new ArrayList();
+	private TecnicoAdministrativoDTO responsavelTecnicoDTO;
+
+	private TecnicoAdministrativoDTO responsavelAdministrativoDTO;
+
+	private List<GabineteDTO> listaGabineteDTO = new ArrayList<>();
 
 	private List<MouseDTO> listaMouseDTO = new ArrayList<>();
+
+	private List<CaboDTO> listaCaboDTO = new ArrayList<>();
+
+	private List<DispositivoProtecaoDTO> listaDispositivoProtecaoDTO = new ArrayList<>();
+
+	private List<ImpressoraDTO> listaImpressoraDTO = new ArrayList<>();
+
+	private List<MonitorDTO> listaMonitorDTO = new ArrayList<>();
+
+	private List<NotebookDTO> listaNotebookDTO = new ArrayList<>();
+
+	private List<TecladoDTO> listaTecladoDTO = new ArrayList<>();
+
+	private List<DispositivoPortatilDTO> listaDispositivoPortatilDTO = new ArrayList<>();
+	
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -43,20 +86,29 @@ public class MovimentacaoDTO {
 		this.tipo = tipo;
 	}
 
-	public String getOrigem() {
-		return origem;
+	public boolean isEntrada_saida() {
+		return entrada_saida;
 	}
 
-	public void setOrigem(String origem) {
-		this.origem = origem;
+	public void setEntrada_saida(boolean entrada_saida) {
+		this.entrada_saida = entrada_saida;
 	}
 
-	public String getDestino() {
-		return destino;
+
+	public UnidadeOrgaoDTO getUnidadeOrgaoOrigemDTO() {
+		return unidadeOrgaoOrigemDTO;
 	}
 
-	public void setDestino(String destino) {
-		this.destino = destino;
+	public void setUnidadeOrgaoOrigemDTO(UnidadeOrgaoDTO unidadeOrgaoOrigemDTO) {
+		this.unidadeOrgaoOrigemDTO = unidadeOrgaoOrigemDTO;
+	}
+
+	public UnidadeOrgaoDTO getUnidadeOrgaoDestinoDTO() {
+		return unidadeOrgaoDestinoDTO;
+	}
+
+	public void setUnidadeOrgaoDestinoDTO(UnidadeOrgaoDTO unidadeOrgaoDestinoDTO) {
+		this.unidadeOrgaoDestinoDTO = unidadeOrgaoDestinoDTO;
 	}
 
 	public Timestamp getData() {
@@ -75,11 +127,28 @@ public class MovimentacaoDTO {
 		this.observacao = observacao;
 	}
 
-	public ArrayList<GabineteDTO> getListaGabineteDTO() {
+
+	public TecnicoAdministrativoDTO getResponsavelTecnicoDTO() {
+		return responsavelTecnicoDTO;
+	}
+
+	public void setResponsavelTecnicoDTO(TecnicoAdministrativoDTO responsavelTecnicoDTO) {
+		this.responsavelTecnicoDTO = responsavelTecnicoDTO;
+	}
+
+	public TecnicoAdministrativoDTO getResponsavelAdministrativoDTO() {
+		return responsavelAdministrativoDTO;
+	}
+
+	public void setResponsavelAdministrativoDTO(TecnicoAdministrativoDTO responsavelAdministrativoDTO) {
+		this.responsavelAdministrativoDTO = responsavelAdministrativoDTO;
+	}
+
+	public List<GabineteDTO> getListaGabineteDTO() {
 		return listaGabineteDTO;
 	}
 
-	public void setListaGabineteDTO(ArrayList<GabineteDTO> listaGabineteDTO) {
+	public void setListaGabineteDTO(List<GabineteDTO> listaGabineteDTO) {
 		this.listaGabineteDTO = listaGabineteDTO;
 	}
 
@@ -91,4 +160,65 @@ public class MovimentacaoDTO {
 		this.listaMouseDTO = listaMouseDTO;
 	}
 
+	public List<CaboDTO> getListaCaboDTO() {
+		return listaCaboDTO;
+	}
+
+	public void setListaCaboDTO(List<CaboDTO> listaCaboDTO) {
+		this.listaCaboDTO = listaCaboDTO;
+	}
+
+	public List<DispositivoProtecaoDTO> getListaDispositivoProtecaoDTO() {
+		return listaDispositivoProtecaoDTO;
+	}
+
+	public void setListaDispositivoProtecaoDTO(List<DispositivoProtecaoDTO> listaDispositivoProtecaoDTO) {
+		this.listaDispositivoProtecaoDTO = listaDispositivoProtecaoDTO;
+	}
+
+	public List<ImpressoraDTO> getListaImpressoraDTO() {
+		return listaImpressoraDTO;
+	}
+
+	public void setListaImpressoraDTO(List<ImpressoraDTO> listaImpressoraDTO) {
+		this.listaImpressoraDTO = listaImpressoraDTO;
+	}
+
+	public List<MonitorDTO> getListaMonitorDTO() {
+		return listaMonitorDTO;
+	}
+
+	public void setListaMonitorDTO(List<MonitorDTO> listaMonitorDTO) {
+		this.listaMonitorDTO = listaMonitorDTO;
+	}
+
+	public List<NotebookDTO> getListaNotebookDTO() {
+		return listaNotebookDTO;
+	}
+
+	public void setListaNotebookDTO(List<NotebookDTO> listaNotebookDTO) {
+		this.listaNotebookDTO = listaNotebookDTO;
+	}
+
+	public List<TecladoDTO> getListaTecladoDTO() {
+		return listaTecladoDTO;
+	}
+
+	public void setListaTecladoDTO(List<TecladoDTO> listaTecladoDTO) {
+		this.listaTecladoDTO = listaTecladoDTO;
+	}
+
+	public List<DispositivoPortatilDTO> getListaDispositivoPortatilDTO() {
+		return listaDispositivoPortatilDTO;
+	}
+
+	public void setListaDispositivoPortatilDTO(List<DispositivoPortatilDTO> listaDispositivoPortatilDTO) {
+		this.listaDispositivoPortatilDTO = listaDispositivoPortatilDTO;
+	}
+
+	
+	
+	
+	
+	
 }

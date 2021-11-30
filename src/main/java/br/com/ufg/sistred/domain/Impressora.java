@@ -13,16 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Impressora implements Serializable {
+public class Impressora extends Common implements Serializable {
 
 	private static final long serialVersionUID = 2206857014798395920L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String modelo;
-	private String fabricante;
-	private String patrimonio;
 
 	@ManyToMany(mappedBy = "listaImpressora")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
@@ -35,47 +28,10 @@ public class Impressora implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Impressora(Integer id, String modelo, String fabricante, String patrimonio,
-			List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
+	public Impressora(List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
 		super();
-		this.id = id;
-		this.modelo = modelo;
-		this.fabricante = fabricante;
-		this.patrimonio = patrimonio;
 		this.listaMovimentacao = listaMovimentacao;
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public String getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(String fabricante) {
-		this.fabricante = fabricante;
-	}
-
-	public String getPatrimonio() {
-		return patrimonio;
-	}
-
-	public void setPatrimonio(String patrimonio) {
-		this.patrimonio = patrimonio;
 	}
 
 	public List<Movimentacao> getListaMovimentacao() {
