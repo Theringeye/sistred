@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	public ModelMapper modelMapper() {
 
@@ -69,18 +69,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// Não cheque essas requisições
 				.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()
-				.antMatchers("/login", "/questions/paged",
-						"/questions/sorted", "/questions", "/authenticate", "/v2/api-docs", "/configuration/ui",
-						"/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**")
+				.antMatchers("/login", "/questions/paged", "/questions/sorted", "/questions", "/authenticate",
+						"/v2/api-docs", "/configuration/ui", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
+						"/webjars/**")
 				.permitAll().
 				// Qualquer outra requisição deve ser checada
 				anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		//httpSecurity.httpBasic().disable();
+		// httpSecurity.httpBasic().disable();
 	}
-	
-	
 
 }

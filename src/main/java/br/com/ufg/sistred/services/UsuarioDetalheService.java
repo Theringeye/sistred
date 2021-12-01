@@ -1,7 +1,5 @@
 package br.com.ufg.sistred.services;
 
-import br.com.ufg.sistred.domain.*;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +8,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import br.com.ufg.sistred.domain.Usuario;
 import br.com.ufg.sistred.repositories.UsuarioRepository;
 import br.com.ufg.sistred.security.UsuarioDetalhe;
 
 /**
  * 
  * @author Ericson de Castro
- * @Descricao: Essa classe é o serviço padrão do SpringSecurity utilizada para consulta
- *             e validação da senha do usuário.
+ * @Descricao: Essa classe é o serviço padrão do SpringSecurity utilizada para
+ *             consulta e validação da senha do usuário.
  */
 @Component
 public class UsuarioDetalheService implements UserDetailsService {

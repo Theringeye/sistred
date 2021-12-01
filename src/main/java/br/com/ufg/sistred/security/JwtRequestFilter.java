@@ -36,7 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private UsuarioDetalheService jwtUserDetailsService;
-	
+
 	@Value("${jwt.secret}")
 	private String secret;
 
@@ -100,8 +100,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	 */
 	private UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {
 
-		String usuario = JWT.require(Algorithm.HMAC512(secret)).build().verify(token)
-				.getSubject();
+		String usuario = JWT.require(Algorithm.HMAC512(secret)).build().verify(token).getSubject();
 
 		if (usuario == null) {
 			return null;

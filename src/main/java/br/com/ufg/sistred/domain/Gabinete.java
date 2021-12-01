@@ -120,5 +120,4 @@ public class Gabinete extends Common implements Serializable {
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
 
-
 }

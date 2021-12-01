@@ -38,10 +38,11 @@ public class MovimentacaoResource {
 	@PostMapping
 	public ResponseEntity<MovimentacaoDTO> salvar(@RequestBody MovimentacaoDTO movimentacaoDTO) {
 
-		movimentacaoDTO =  movimentacaoService.salvar(movimentacaoDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(movimentacaoDTO.getId()).toUri();
+		movimentacaoDTO = movimentacaoService.salvar(movimentacaoDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(movimentacaoDTO.getId())
+				.toUri();
 		return ResponseEntity.created(uri).build();
-	
+
 	}
 
 	@GetMapping(value = "/{id}")
@@ -49,16 +50,14 @@ public class MovimentacaoResource {
 
 		return ResponseEntity.ok().body(movimentacaoService.findById(id));
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<MovimentacaoDTO>> findAll(@PathVariable Integer id) {
 
 		List<MovimentacaoDTO> listaMovimentacaoDTO = movimentacaoService.findAll();
-		
+
 		return ResponseEntity.ok().body(listaMovimentacaoDTO);
 	}
-	
-	
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {

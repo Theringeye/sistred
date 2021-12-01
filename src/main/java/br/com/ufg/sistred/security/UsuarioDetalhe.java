@@ -1,13 +1,13 @@
 package br.com.ufg.sistred.security;
 
-import br.com.ufg.sistred.domain.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import br.com.ufg.sistred.domain.Usuario;
 
 /**
  * 

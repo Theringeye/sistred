@@ -72,7 +72,8 @@ public class MovimentacaoService {
 
 	public MovimentacaoDTO salvar(MovimentacaoDTO movimentacaoDTO) {
 
-		//verificar como os dados serão enviados da aplicação front para decidir como realizar o método salvar
+		// verificar como os dados serão enviados da aplicação front para decidir como
+		// realizar o método salvar
 		Movimentacao movimentacao = modelMapper.map(movimentacaoDTO, Movimentacao.class);
 
 		return converteEntityToDTO(movimentacaoRepository.save(movimentacao));
@@ -120,12 +121,12 @@ public class MovimentacaoService {
 		UnidadeOrgaoDTO unidadeOrgaoODestinoDTO = new UnidadeOrgaoDTO();
 
 		movimentacaoDTO = modelMapper.map(movimentacao, MovimentacaoDTO.class);
-		
+
 		unidadeOrgaoOrigemDTO = modelMapper.map(movimentacao.getUnidadeOrgaoOrigem(), UnidadeOrgaoDTO.class);
 		unidadeOrgaoODestinoDTO = modelMapper.map(movimentacao.getUnidadeOrgaoDestino(), UnidadeOrgaoDTO.class);
+		
 		movimentacaoDTO.setUnidadeOrgaoOrigemDTO(unidadeOrgaoOrigemDTO);
 		movimentacaoDTO.setUnidadeOrgaoDestinoDTO(unidadeOrgaoODestinoDTO);
-		
 
 		for (Gabinete gabinete : movimentacao.getListaGabinete()) {
 
@@ -169,22 +170,21 @@ public class MovimentacaoService {
 
 		}
 
-		
 		for (DispositivoProtecao dispositivoProtecao : movimentacao.getListaDispositivoProtecao()) {
 
 			dispositivoProtecaoDTO = modelMapper.map(dispositivoProtecao, DispositivoProtecaoDTO.class);
 
 			for (HistoricoAtivo historicoAtivo : dispositivoProtecao.getListaHistoricoAtivo()) {
 
-				dispositivoProtecaoDTO.getListaHistoricoAtivoDTO().add(modelMapper.map(historicoAtivo, HistoricoAtivoDTO.class));
+				dispositivoProtecaoDTO.getListaHistoricoAtivoDTO()
+						.add(modelMapper.map(historicoAtivo, HistoricoAtivoDTO.class));
 
 			}
 
 			movimentacaoDTO.getListaDispositivoProtecaoDTO().add(dispositivoProtecaoDTO);
 
 		}
-		
-		
+
 		for (Impressora impressora : movimentacao.getListaImpressora()) {
 
 			impressoraDTO = modelMapper.map(impressora, ImpressoraDTO.class);
@@ -198,7 +198,7 @@ public class MovimentacaoService {
 			movimentacaoDTO.getListaImpressoraDTO().add(impressoraDTO);
 
 		}
-		
+
 		for (Monitor monitor : movimentacao.getListaMonitor()) {
 
 			monitorDTO = modelMapper.map(monitor, MonitorDTO.class);
@@ -212,7 +212,7 @@ public class MovimentacaoService {
 			movimentacaoDTO.getListaMonitorDTO().add(monitorDTO);
 
 		}
-		
+
 		for (Notebook notebook : movimentacao.getListaNotebook()) {
 
 			notebookDTO = modelMapper.map(notebook, NotebookDTO.class);
@@ -226,7 +226,7 @@ public class MovimentacaoService {
 			movimentacaoDTO.getListaNotebookDTO().add(notebookDTO);
 
 		}
-		
+
 		for (Teclado teclado : movimentacao.getListaTeclado()) {
 
 			tecladoDTO = modelMapper.map(teclado, TecladoDTO.class);
@@ -240,21 +240,22 @@ public class MovimentacaoService {
 			movimentacaoDTO.getListaTecladoDTO().add(tecladoDTO);
 
 		}
-		
+
 		for (DispositivoPortatil dispositivoPortatil : movimentacao.getListaDispositivoPortatil()) {
 
 			dispositivoPortatilDTO = modelMapper.map(dispositivoPortatil, DispositivoPortatilDTO.class);
 
 			for (HistoricoAtivo historicoAtivo : dispositivoPortatil.getListaHistoricoAtivo()) {
 
-				dispositivoPortatilDTO.getListaHistoricoAtivoDTO().add(modelMapper.map(historicoAtivo, HistoricoAtivoDTO.class));
+				dispositivoPortatilDTO.getListaHistoricoAtivoDTO()
+						.add(modelMapper.map(historicoAtivo, HistoricoAtivoDTO.class));
 
 			}
 
 			movimentacaoDTO.getListaDispositivoPortatilDTO().add(dispositivoPortatilDTO);
 
 		}
-		
+
 		return movimentacaoDTO;
 
 	}

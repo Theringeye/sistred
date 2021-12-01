@@ -10,5 +10,4 @@ public class SistredApplication {
 		SpringApplication.run(SistredApplication.class, args);
 	}
 
-	
 }
