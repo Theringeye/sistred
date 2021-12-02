@@ -1,6 +1,7 @@
 package br.com.ufg.sistred.security;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,8 @@ import io.jsonwebtoken.Jwts;
 @Component
 public class JwtTokenUtil implements Serializable {
 	private static final long serialVersionUID = -2550185165626007488L;
-	public static final long JWT_TOKEN_VALIDITY = 600000;
+	//tempo, em milissegundos, equivalente a um ano, 365 dias.
+	public static final BigDecimal JWT_TOKEN_VALIDITY = new BigDecimal("31536000000");
 
 	@Value("${jwt.secret}")
 	private String secret;
@@ -62,7 +64,7 @@ public class JwtTokenUtil implements Serializable {
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
 		String token = JWT.create().withSubject(subject)
-				.withExpiresAt(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
+				.withExpiresAt(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY.longValue()))
 				// essa parte é a parte em que o token é assinado.
 				.sign(Algorithm.HMAC512(secret));
 
