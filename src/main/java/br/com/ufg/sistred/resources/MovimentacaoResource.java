@@ -45,6 +45,8 @@ public class MovimentacaoResource {
 
 	}
 
+
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MovimentacaoDTO> findById(@PathVariable Integer id) {
 
