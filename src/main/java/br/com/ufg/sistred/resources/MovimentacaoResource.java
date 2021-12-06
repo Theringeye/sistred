@@ -27,6 +27,7 @@ import br.com.ufg.sistred.services.MovimentacaoService;
  * 
  * 
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/movimentacao")
 public class MovimentacaoResource {
@@ -34,7 +35,7 @@ public class MovimentacaoResource {
 	@Autowired
 	private MovimentacaoService movimentacaoService;
 
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@PostMapping
 	public ResponseEntity<MovimentacaoDTO> salvar(@RequestBody MovimentacaoDTO movimentacaoDTO) {
 
@@ -46,7 +47,6 @@ public class MovimentacaoResource {
 	}
 
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MovimentacaoDTO> findById(@PathVariable Integer id) {
 
