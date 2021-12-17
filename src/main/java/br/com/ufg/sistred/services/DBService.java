@@ -83,6 +83,8 @@ public class DBService {
 		 */
 
 		Cabo cabo1 = new Cabo(null, "y", "sony", null, null);
+		Cabo cabo2 = new Cabo(null, "VGA", "dell", null, null);
+		Cabo cabo3 = new Cabo(null, "Display Port", "hp", null, null);
 
 		ArrayList<Gabinete> listaGabinete = new ArrayList<>();
 		ArrayList<Mouse> listaMouse = new ArrayList<>();
@@ -93,6 +95,8 @@ public class DBService {
 		listaMouse.add(mouse1);
 		listaMouse.add(mouse2);
 		listaCabo.add(cabo1);
+		listaCabo.add(cabo2);
+		listaCabo.add(cabo3);
 
 		// movimentacao.getGabinetes().addAll(Arrays.asList(gabinete));
 
@@ -102,6 +106,8 @@ public class DBService {
 		mouseRepository.saveAll(Arrays.asList(mouse1));
 		mouseRepository.saveAll(Arrays.asList(mouse2));
 		caboRepository.saveAll(Arrays.asList(cabo1));
+		caboRepository.saveAll(Arrays.asList(cabo2));
+		caboRepository.saveAll(Arrays.asList(cabo3));
 		unidadeOrgaoRepository.saveAll(Arrays.asList(unidadeOrgao1));
 		tecnicoAdministrativo.setUnidadeOrgaoLotacao(unidadeOrgao1);
 		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo));
