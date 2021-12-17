@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cabo implements Serializable {
@@ -19,7 +21,11 @@ public class Cabo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotNull
+	@NotEmpty
 	private String tipo;
+	@NotNull
+	@NotEmpty
 	private String fabricante;
 
 	@ManyToMany(mappedBy = "listaCabo")
