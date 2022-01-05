@@ -146,6 +146,16 @@ public class DBService {
 
 		HistoricoAtivo historicoMouse2 = new HistoricoAtivo(null, "com defeito", new Timestamp(0), null, mouse2, null,
 				null, null, null, null, null, null);
+		
+		HistoricoAtivo historicoCabo1 = new HistoricoAtivo(null, "com defeito", new Timestamp(0), null, null, cabo1,
+				null, null, null, null, null, null);
+		
+		HistoricoAtivo historicoCabo2 = new HistoricoAtivo(null, "funcionando2", new Timestamp(0), null, null, cabo2,
+				null, null, null, null, null, null);
+		
+		HistoricoAtivo historicoCabo3 = new HistoricoAtivo(null, "funcionando3", new Timestamp(0), null, null, cabo3,
+				null, null, null, null, null, null);
+		
 
 		historicoAtivoRepository.save(historicoGabinete1);
 
@@ -154,6 +164,12 @@ public class DBService {
 		historicoAtivoRepository.save(historicoMouse1);
 
 		historicoAtivoRepository.save(historicoMouse2);
+		
+		historicoAtivoRepository.save(historicoCabo1);
+		
+		historicoAtivoRepository.save(historicoCabo2);
+		
+		historicoAtivoRepository.save(historicoCabo3);
 
 		/*
 		 * Movimentacao movimentacaoBusca = new Movimentacao();
