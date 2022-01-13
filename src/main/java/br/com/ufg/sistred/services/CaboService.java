@@ -8,28 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ufg.sistred.domain.Cabo;
-import br.com.ufg.sistred.domain.DispositivoPortatil;
-import br.com.ufg.sistred.domain.DispositivoProtecao;
-import br.com.ufg.sistred.domain.Gabinete;
 import br.com.ufg.sistred.domain.HistoricoAtivo;
-import br.com.ufg.sistred.domain.Impressora;
-import br.com.ufg.sistred.domain.Monitor;
-import br.com.ufg.sistred.domain.Mouse;
 import br.com.ufg.sistred.domain.Movimentacao;
-import br.com.ufg.sistred.domain.Notebook;
-import br.com.ufg.sistred.domain.Teclado;
 import br.com.ufg.sistred.dto.CaboDTO;
-import br.com.ufg.sistred.dto.DispositivoPortatilDTO;
-import br.com.ufg.sistred.dto.DispositivoProtecaoDTO;
-import br.com.ufg.sistred.dto.GabineteDTO;
 import br.com.ufg.sistred.dto.HistoricoAtivoDTO;
-import br.com.ufg.sistred.dto.ImpressoraDTO;
-import br.com.ufg.sistred.dto.MonitorDTO;
-import br.com.ufg.sistred.dto.MouseDTO;
 import br.com.ufg.sistred.dto.MovimentacaoDTO;
-import br.com.ufg.sistred.dto.NotebookDTO;
-import br.com.ufg.sistred.dto.TecladoDTO;
-import br.com.ufg.sistred.dto.UnidadeOrgaoDTO;
 import br.com.ufg.sistred.repositories.CaboRepository;
 
 @Service

@@ -33,6 +33,16 @@ public class Teclado extends Common implements Serializable {
 		this.listaMovimentacao = listaMovimentacao;
 		this.listaHistoricoAtivo = listaHistoricoAtivo;
 	}
+	
+	public Teclado(String modelo, String fabricante, String patrimonio, String padrao, List<Movimentacao> listaMovimentacao, List<HistoricoAtivo> listaHistoricoAtivo) {
+		super();
+		this.setModelo(modelo);
+		this.setFabricante(fabricante);
+		this.setPatrimonio(patrimonio);
+		this.padrao = padrao;
+		this.listaMovimentacao = listaMovimentacao;
+		this.listaHistoricoAtivo = listaHistoricoAtivo;
+	}
 
 	public String getPadrao() {
 		return padrao;

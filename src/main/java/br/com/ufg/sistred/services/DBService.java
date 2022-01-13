@@ -12,6 +12,7 @@ import br.com.ufg.sistred.domain.Gabinete;
 import br.com.ufg.sistred.domain.HistoricoAtivo;
 import br.com.ufg.sistred.domain.Mouse;
 import br.com.ufg.sistred.domain.Movimentacao;
+import br.com.ufg.sistred.domain.Teclado;
 import br.com.ufg.sistred.domain.TecnicoAdministrativo;
 import br.com.ufg.sistred.domain.UnidadeOrgao;
 import br.com.ufg.sistred.domain.Usuario;
@@ -20,6 +21,7 @@ import br.com.ufg.sistred.repositories.GabineteRepository;
 import br.com.ufg.sistred.repositories.HistoricoAtivoRepository;
 import br.com.ufg.sistred.repositories.MouseRepository;
 import br.com.ufg.sistred.repositories.MovimentacaoRepository;
+import br.com.ufg.sistred.repositories.TecladoRepository;
 import br.com.ufg.sistred.repositories.TecnicoAdministrativoRepository;
 import br.com.ufg.sistred.repositories.UnidadeOrgaoRepository;
 import br.com.ufg.sistred.repositories.UsuarioRepository;
@@ -43,6 +45,8 @@ public class DBService {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private HistoricoAtivoRepository historicoAtivoRepository;
+	@Autowired
+	private TecladoRepository tecladoRepository;
 
 	public void instanciaBancoDeDados() {
 
@@ -85,10 +89,14 @@ public class DBService {
 		Cabo cabo1 = new Cabo(null, "y", "sony", null, null);
 		Cabo cabo2 = new Cabo(null, "VGA", "dell", null, null);
 		Cabo cabo3 = new Cabo(null, "Display Port", "hp", null, null);
+		
+		Teclado tec1 = new Teclado("DELLTECLADO", "DELL", "711095","ABNT-BR", null, null);
+		Teclado tec2 = new Teclado("HPTECLADO", "HP", "728895","ABNT-EUA", null, null);
 
 		ArrayList<Gabinete> listaGabinete = new ArrayList<>();
 		ArrayList<Mouse> listaMouse = new ArrayList<>();
 		ArrayList<Cabo> listaCabo = new ArrayList<>();
+		ArrayList<Teclado> listaTeclado = new ArrayList<>();
 
 		listaGabinete.add(gabinete1);
 		listaGabinete.add(gabinete2);
@@ -97,6 +105,8 @@ public class DBService {
 		listaCabo.add(cabo1);
 		listaCabo.add(cabo2);
 		listaCabo.add(cabo3);
+		listaTeclado.add(tec1);
+		listaTeclado.add(tec2);
 
 		// movimentacao.getGabinetes().addAll(Arrays.asList(gabinete));
 
@@ -111,6 +121,8 @@ public class DBService {
 		unidadeOrgaoRepository.saveAll(Arrays.asList(unidadeOrgao1));
 		tecnicoAdministrativo.setUnidadeOrgaoLotacao(unidadeOrgao1);
 		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo));
+		tecladoRepository.saveAll(Arrays.asList(tec1));
+		tecladoRepository.saveAll(Arrays.asList(tec2));
 
 		/*
 		 * public Movimentacao(Integer id, String tipo, String origem, String destino,
