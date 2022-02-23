@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.ufg.sistred.domain.Cabo;
 import br.com.ufg.sistred.domain.Gabinete;
 import br.com.ufg.sistred.domain.HistoricoAtivo;
+import br.com.ufg.sistred.domain.Monitor;
 import br.com.ufg.sistred.domain.Mouse;
 import br.com.ufg.sistred.domain.Movimentacao;
 import br.com.ufg.sistred.domain.Teclado;
@@ -19,6 +20,7 @@ import br.com.ufg.sistred.domain.Usuario;
 import br.com.ufg.sistred.repositories.CaboRepository;
 import br.com.ufg.sistred.repositories.GabineteRepository;
 import br.com.ufg.sistred.repositories.HistoricoAtivoRepository;
+import br.com.ufg.sistred.repositories.MonitorRepository;
 import br.com.ufg.sistred.repositories.MouseRepository;
 import br.com.ufg.sistred.repositories.MovimentacaoRepository;
 import br.com.ufg.sistred.repositories.TecladoRepository;
@@ -47,6 +49,8 @@ public class DBService {
 	private HistoricoAtivoRepository historicoAtivoRepository;
 	@Autowired
 	private TecladoRepository tecladoRepository;
+	@Autowired
+	private MonitorRepository monitorRepository;
 
 	public void instanciaBancoDeDados() {
 
@@ -80,6 +84,15 @@ public class DBService {
 
 		mouse2.setFabricante("fabricantemosue2");
 		mouse2.setModelo("usb2");
+		
+		/*
+		 * MONITORES
+		 * */
+		
+		Monitor monitor1 = new Monitor("20", null, null);
+		Monitor monitor2 = new Monitor("19", null, null);
+		monitor1.setFabricante("Dell");
+		monitor2.setFabricante("HP");
 
 		/*
 		 * mouse1.setFabricante("fabricante1"); mouse1.setModelo("modelo1");
@@ -97,6 +110,7 @@ public class DBService {
 		ArrayList<Mouse> listaMouse = new ArrayList<>();
 		ArrayList<Cabo> listaCabo = new ArrayList<>();
 		ArrayList<Teclado> listaTeclado = new ArrayList<>();
+		ArrayList<Monitor> listaMonitor = new ArrayList<>();
 
 		listaGabinete.add(gabinete1);
 		listaGabinete.add(gabinete2);
@@ -107,6 +121,8 @@ public class DBService {
 		listaCabo.add(cabo3);
 		listaTeclado.add(tec1);
 		listaTeclado.add(tec2);
+		listaMonitor.add(monitor1);
+		listaMonitor.add(monitor2);
 
 		// movimentacao.getGabinetes().addAll(Arrays.asList(gabinete));
 
@@ -123,6 +139,7 @@ public class DBService {
 		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo));
 		tecladoRepository.saveAll(Arrays.asList(tec1));
 		tecladoRepository.saveAll(Arrays.asList(tec2));
+		monitorRepository.saveAll(Arrays.asList(monitor1, monitor2));
 
 		/*
 		 * public Movimentacao(Integer id, String tipo, String origem, String destino,

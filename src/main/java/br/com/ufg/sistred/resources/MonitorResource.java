@@ -2,6 +2,7 @@ package br.com.ufg.sistred.resources;
 
 import java.net.URI;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,22 +14,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import br.com.ufg.sistred.dto.GabineteDTO;
-import br.com.ufg.sistred.services.GabineteService;
+
+import br.com.ufg.sistred.dto.MonitorDTO;
+import br.com.ufg.sistred.services.MonitorService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "/gabinete")
-public class GabineteResource {
-	
+@RequestMapping("/monitor")
+public class MonitorResource {
+
 	@Autowired
-	private GabineteService gabineteService;
+	private MonitorService monitorService;
 	
 	@PostMapping
-	public ResponseEntity<GabineteDTO> salvar(@RequestBody GabineteDTO gabineteDTO) {
+	public ResponseEntity<MonitorDTO> salvar(@RequestBody MonitorDTO MonitorDTO) {
 
-		gabineteDTO = gabineteService.salvar(gabineteDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(gabineteDTO.getId())
+		MonitorDTO = monitorService.salvar(MonitorDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(MonitorDTO.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 
@@ -36,26 +38,23 @@ public class GabineteResource {
 
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<GabineteDTO> findById(@PathVariable Integer id) {
+	public ResponseEntity<MonitorDTO> findById(@PathVariable Integer id) {
 
-		return ResponseEntity.ok().body(gabineteService.findById(id));
+		return ResponseEntity.ok().body(monitorService.findById(id));
 	}
 
 	@GetMapping
-	public ResponseEntity<List<GabineteDTO>> findAll() {
+	public ResponseEntity<List<MonitorDTO>> findAll() {
 
-		List<GabineteDTO> listaGabineteDTO = gabineteService.findAll();
+		List<MonitorDTO> listaMonitorDTO = monitorService.findAll();
 
-		return ResponseEntity.ok().body(listaGabineteDTO);
+		return ResponseEntity.ok().body(listaMonitorDTO);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 
-		gabineteService.deletar(id);
+		monitorService.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
-
-	
-
 }
