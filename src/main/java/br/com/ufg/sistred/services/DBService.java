@@ -56,7 +56,8 @@ public class DBService {
 
 		Usuario usuario = new Usuario(null, "ericson", "$2a$10$3wI9N2GiSmi2WSZ2FhNAAeWcwRwwHtAg2BG3wvZHfq2uHUprCVZBe");
 
-		UnidadeOrgao unidadeOrgao1 = new UnidadeOrgao(null, "CERCOMP", "CERCOMP", "4444", null, null, null);
+		UnidadeOrgao unidadeOrgao1 = new UnidadeOrgao(null, "Centro de Recursos Computacionais", "CERCOMP", "1351", null, null, null);
+		UnidadeOrgao unidadeOrgao2 = new UnidadeOrgao(null, "Diretoria de Logística", "DLOG", "1019", null, null, null);
 
 		TecnicoAdministrativo tecnicoAdministrativo = new TecnicoAdministrativo(null, "Ericson", null, "452342534",
 				null, null);
@@ -134,7 +135,7 @@ public class DBService {
 		caboRepository.saveAll(Arrays.asList(cabo1));
 		caboRepository.saveAll(Arrays.asList(cabo2));
 		caboRepository.saveAll(Arrays.asList(cabo3));
-		unidadeOrgaoRepository.saveAll(Arrays.asList(unidadeOrgao1));
+		unidadeOrgaoRepository.saveAll(Arrays.asList(unidadeOrgao1, unidadeOrgao2));
 		tecnicoAdministrativo.setUnidadeOrgaoLotacao(unidadeOrgao1);
 		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo));
 		tecladoRepository.saveAll(Arrays.asList(tec1));
