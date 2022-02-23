@@ -22,7 +22,7 @@ import br.com.ufg.sistred.services.GabineteService;
 public class GabineteResource {
 	
 	@Autowired
-	private GabineteService gabineteService;
+	private GabineteService gabineteService; //pode excluir esse comentario
 	
 	@PostMapping
 	public ResponseEntity<GabineteDTO> salvar(@RequestBody GabineteDTO gabineteDTO) {
