@@ -7,7 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ufg.sistred.domain.Movimentacao;
 import br.com.ufg.sistred.domain.TecnicoAdministrativo;
+import br.com.ufg.sistred.domain.UnidadeOrgao;
+import br.com.ufg.sistred.dto.MovimentacaoDTO;
 import br.com.ufg.sistred.dto.TecnicoAdministrativoDTO;
 import br.com.ufg.sistred.repositories.TecnicoAdministrativoRepository;
 
@@ -55,6 +58,16 @@ public class TecnicoAdministrativoService {
 		for (TecnicoAdministrativo ta : listaTecnicoAdministrativos) {
 
 			taDTO = modelMapper.map(ta, TecnicoAdministrativoDTO.class);
+
+			for (Movimentacao mov : ta.getListaMovimentacaoResponsavelTecnico()) {
+				taDTO.getListaMovimentacaoResponsavelTecnicoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
+			}
+
+			for (Movimentacao movimentacao : ta.getListaMovimentacaoResponsavelAdministrativo()) {
+
+				taDTO.getListaMovimentacaoResponsavelAdministrativoDTO().add(modelMapper.map(movimentacao, MovimentacaoDTO.class));
+			}
+
 			listaTecnicoAdministrativoDTO.add(taDTO);
 		}
 

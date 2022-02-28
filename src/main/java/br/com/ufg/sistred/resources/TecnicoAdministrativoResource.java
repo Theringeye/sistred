@@ -20,17 +20,17 @@ import br.com.ufg.sistred.services.TecnicoAdministrativoService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/tecnicoadministrativo")
+@RequestMapping("/ta")
 public class TecnicoAdministrativoResource {
 
 	@Autowired
 	private TecnicoAdministrativoService ta;
 	
 	@PostMapping
-	public ResponseEntity<TecnicoAdministrativoDTO> salvar(@RequestBody TecnicoAdministrativoDTO unidadeOrgaoDTO) {
+	public ResponseEntity<TecnicoAdministrativoDTO> salvar(@RequestBody TecnicoAdministrativoDTO taDTO) {
 
-		unidadeOrgaoDTO = ta.salvar(unidadeOrgaoDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(unidadeOrgaoDTO.getId())
+		taDTO = ta.salvar(taDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(taDTO.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 
