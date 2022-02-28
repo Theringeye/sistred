@@ -61,6 +61,8 @@ public class DBService {
 
 		TecnicoAdministrativo tecnicoAdministrativo = new TecnicoAdministrativo(null, "Ericson", null, "452342534",
 				null, null);
+		TecnicoAdministrativo tecnicoAdministrativo2 = new TecnicoAdministrativo(null, "mURILO", null, "1351",
+				null, null);
 
 		Gabinete gabinete1 = new Gabinete("I5", "8GB", "SSD", "1TB", "WINDOWS", "10", "45234523452345234", null, null);
 
@@ -137,7 +139,7 @@ public class DBService {
 		caboRepository.saveAll(Arrays.asList(cabo3));
 		unidadeOrgaoRepository.saveAll(Arrays.asList(unidadeOrgao1, unidadeOrgao2));
 		tecnicoAdministrativo.setUnidadeOrgaoLotacao(unidadeOrgao1);
-		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo));
+		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo, tecnicoAdministrativo2));
 		tecladoRepository.saveAll(Arrays.asList(tec1));
 		tecladoRepository.saveAll(Arrays.asList(tec2));
 		monitorRepository.saveAll(Arrays.asList(monitor1, monitor2));
