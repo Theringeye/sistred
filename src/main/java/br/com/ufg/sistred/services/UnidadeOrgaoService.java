@@ -7,7 +7,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ufg.sistred.domain.HistoricoAtivo;
+import br.com.ufg.sistred.domain.Mouse;
+import br.com.ufg.sistred.domain.Movimentacao;
+import br.com.ufg.sistred.domain.TecnicoAdministrativo;
 import br.com.ufg.sistred.domain.UnidadeOrgao;
+import br.com.ufg.sistred.dto.HistoricoAtivoDTO;
+import br.com.ufg.sistred.dto.MouseDTO;
+import br.com.ufg.sistred.dto.MovimentacaoDTO;
+import br.com.ufg.sistred.dto.TecnicoAdministrativoDTO;
 import br.com.ufg.sistred.dto.UnidadeOrgaoDTO;
 import br.com.ufg.sistred.repositories.UnidadeOrgaoRepository;
 
@@ -52,11 +60,24 @@ public class UnidadeOrgaoService {
 
 	private List<UnidadeOrgaoDTO> converteEntityToDTO(List<UnidadeOrgao> lista) {
 
+			
 		UnidadeOrgaoDTO unidadeOrgaoDTO = new UnidadeOrgaoDTO();
 		ArrayList<UnidadeOrgaoDTO> listaDTO = new ArrayList<UnidadeOrgaoDTO>();
 
+		
 		for (UnidadeOrgao uo : lista) {
 			unidadeOrgaoDTO = modelMapper.map(uo, UnidadeOrgaoDTO.class);
+			
+			for(Movimentacao mov : uo.getListaMovimentacaoDestino()) {
+				unidadeOrgaoDTO.getListaMovimentacaoDestinoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
+			}
+			for(Movimentacao mov : uo.getListaMovimentacaoOrigem()) {
+				unidadeOrgaoDTO.getListaMovimentacaoOrigemDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
+			}
+			for(TecnicoAdministrativo ta : uo.getListaTecnicoAdministrativo()) {
+				unidadeOrgaoDTO.getListaTecnicoAdministrativoDTO().add(modelMapper.map(ta, TecnicoAdministrativoDTO.class));
+			}
+			
 			listaDTO.add(unidadeOrgaoDTO);
 		}
 

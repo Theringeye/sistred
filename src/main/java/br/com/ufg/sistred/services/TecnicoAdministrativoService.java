@@ -55,10 +55,13 @@ public class TecnicoAdministrativoService {
 		TecnicoAdministrativoDTO taDTO = new TecnicoAdministrativoDTO();
 		ArrayList<TecnicoAdministrativoDTO> listaTecnicoAdministrativoDTO = new ArrayList<TecnicoAdministrativoDTO>();
 
+		
 		for (TecnicoAdministrativo ta : listaTecnicoAdministrativos) {
 
 			taDTO = modelMapper.map(ta, TecnicoAdministrativoDTO.class);
 
+			taDTO.setUnidadeOrgaoLotacao(ta.getUnidadeOrgaoLotacao());
+			
 			for (Movimentacao mov : ta.getListaMovimentacaoResponsavelTecnico()) {
 				taDTO.getListaMovimentacaoResponsavelTecnicoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
 			}
