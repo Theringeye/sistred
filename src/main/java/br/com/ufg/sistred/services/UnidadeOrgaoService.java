@@ -68,15 +68,15 @@ public class UnidadeOrgaoService {
 		for (UnidadeOrgao uo : lista) {
 			unidadeOrgaoDTO = modelMapper.map(uo, UnidadeOrgaoDTO.class);
 			
-			for(Movimentacao mov : uo.getListaMovimentacaoDestino()) {
-				unidadeOrgaoDTO.getListaMovimentacaoDestinoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
-			}
-			for(Movimentacao mov : uo.getListaMovimentacaoOrigem()) {
-				unidadeOrgaoDTO.getListaMovimentacaoOrigemDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
-			}
-			for(TecnicoAdministrativo ta : uo.getListaTecnicoAdministrativo()) {
-				unidadeOrgaoDTO.getListaTecnicoAdministrativoDTO().add(modelMapper.map(ta, TecnicoAdministrativoDTO.class));
-			}
+//			for(Movimentacao mov : uo.getListaMovimentacaoDestino()) {
+//				unidadeOrgaoDTO.getListaMovimentacaoDestinoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
+//			}
+//			for(Movimentacao mov : uo.getListaMovimentacaoOrigem()) {
+//				unidadeOrgaoDTO.getListaMovimentacaoOrigemDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
+//			}
+//			for(TecnicoAdministrativo ta : uo.getListaTecnicoAdministrativo()) {
+//				unidadeOrgaoDTO.getListaTecnicoAdministrativoDTO().add(modelMapper.map(ta, TecnicoAdministrativoDTO.class));
+//			}
 			
 			listaDTO.add(unidadeOrgaoDTO);
 		}

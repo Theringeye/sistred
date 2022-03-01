@@ -59,17 +59,15 @@ public class TecnicoAdministrativoService {
 		for (TecnicoAdministrativo ta : listaTecnicoAdministrativos) {
 
 			taDTO = modelMapper.map(ta, TecnicoAdministrativoDTO.class);
-
-			taDTO.setUnidadeOrgaoLotacao(ta.getUnidadeOrgaoLotacao());
 			
-			for (Movimentacao mov : ta.getListaMovimentacaoResponsavelTecnico()) {
-				taDTO.getListaMovimentacaoResponsavelTecnicoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
-			}
-
-			for (Movimentacao movimentacao : ta.getListaMovimentacaoResponsavelAdministrativo()) {
-
-				taDTO.getListaMovimentacaoResponsavelAdministrativoDTO().add(modelMapper.map(movimentacao, MovimentacaoDTO.class));
-			}
+//			for (Movimentacao mov : ta.getListaMovimentacaoResponsavelTecnico()) {
+//				taDTO.getListaMovimentacaoResponsavelTecnicoDTO().add(modelMapper.map(mov, MovimentacaoDTO.class));
+//			}
+//
+//			for (Movimentacao movimentacao : ta.getListaMovimentacaoResponsavelAdministrativo()) {
+//
+//				taDTO.getListaMovimentacaoResponsavelAdministrativoDTO().add(modelMapper.map(movimentacao, MovimentacaoDTO.class));
+//			}
 
 			listaTecnicoAdministrativoDTO.add(taDTO);
 		}
