@@ -52,6 +52,7 @@ public class DBService {
 	@Autowired
 	private MonitorRepository monitorRepository;
 
+
 	public void instanciaBancoDeDados() {
 
 		Usuario usuario = new Usuario(null, "ericson", "$2a$10$3wI9N2GiSmi2WSZ2FhNAAeWcwRwwHtAg2BG3wvZHfq2uHUprCVZBe");
@@ -60,6 +61,8 @@ public class DBService {
 		UnidadeOrgao unidadeOrgao2 = new UnidadeOrgao(null, "Diretoria de Logística", "DLOG", "1019", null, null, null);
 
 		TecnicoAdministrativo tecnicoAdministrativo = new TecnicoAdministrativo(null, "Ericson", null, "452342534",
+				null, null);
+		TecnicoAdministrativo tecnicoAdministrativo2 = new TecnicoAdministrativo(null, "Murilo", null, "1351",
 				null, null);
 
 		Gabinete gabinete1 = new Gabinete("I5", "8GB", "SSD", "1TB", "WINDOWS", "10", "45234523452345234", null, null);
@@ -137,7 +140,8 @@ public class DBService {
 		caboRepository.saveAll(Arrays.asList(cabo3));
 		unidadeOrgaoRepository.saveAll(Arrays.asList(unidadeOrgao1, unidadeOrgao2));
 		tecnicoAdministrativo.setUnidadeOrgaoLotacao(unidadeOrgao1);
-		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo));
+		tecnicoAdministrativo2.setUnidadeOrgaoLotacao(unidadeOrgao2);
+		tecnicoAdministrativoRepository.saveAll(Arrays.asList(tecnicoAdministrativo, tecnicoAdministrativo2));
 		tecladoRepository.saveAll(Arrays.asList(tec1));
 		tecladoRepository.saveAll(Arrays.asList(tec2));
 		monitorRepository.saveAll(Arrays.asList(monitor1, monitor2));
@@ -208,7 +212,7 @@ public class DBService {
 		 * 
 		 * movimentacaoBusca.getListaGabinete();
 		 */
-
+		
 	}
 
 }
