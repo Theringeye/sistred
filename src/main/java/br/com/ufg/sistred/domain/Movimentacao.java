@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,37 +31,46 @@ public class Movimentacao implements Serializable {
 	private String tipo;
 	private boolean entrada_saida;
 
-	@ManyToOne
+	@JsonBackReference
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "unidadeOrgaoOrigem_id")
 	private UnidadeOrgao unidadeOrgaoOrigem;
 
-	@ManyToOne
+	@JsonBackReference
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "unidadeOrgaoDestino_id")
 	private UnidadeOrgao unidadeOrgaoDestino;
 
 	private Timestamp data;
 	private String observacao;
-	@JsonIgnore
-	@ManyToOne(optional = true)
+
+	@JsonBackReference
+	@ManyToOne(optional = true, fetch=FetchType.LAZY)
 	@JoinColumn(name = "responsavelTecnico_id")
 	private TecnicoAdministrativo responsavelTecnico;
-	@JsonIgnore
-	@ManyToOne(optional = true)
+	
+
+	@JsonBackReference
+	@ManyToOne(optional = true, fetch=FetchType.LAZY)
 	@JoinColumn(name = "responsavelAdministrativo_id")
 	private TecnicoAdministrativo responsavelAdministrativo;
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Gabinete", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "gabinete_id"))
 	private List<Gabinete> listaGabinete = new ArrayList<>();
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Mouse", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "mouse_id"))
 	private List<Mouse> listaMouse = new ArrayList<>();
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Cabo", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "cabo_id"))
 	private List<Cabo> listaCabo = new ArrayList<>();
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_DispositivoProtecao", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "dispositivoProtecao_id"))
 	private List<DispositivoProtecao> listaDispositivoProtecao = new ArrayList<>();
@@ -69,6 +79,7 @@ public class Movimentacao implements Serializable {
 	@JoinTable(name = "Movimentacao_Impressora", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "impressora_id"))
 	private List<Impressora> listaImpressora = new ArrayList<>();
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Monitor", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "monitor_id"))
 	private List<Monitor> listaMonitor = new ArrayList<>();
@@ -77,10 +88,12 @@ public class Movimentacao implements Serializable {
 	@JoinTable(name = "Movimentacao_Notebook", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "notebook_id"))
 	private List<Notebook> listaNotebook = new ArrayList<>();
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_Teclado", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "teclado_id"))
 	private List<Teclado> listaTeclado = new ArrayList<>();
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Movimentacao_DispositivoPortatil", joinColumns = @JoinColumn(name = "movimentacao_id"), inverseJoinColumns = @JoinColumn(name = "dispositivoPortatil_id"))
 	private List<DispositivoPortatil> listaDispositivoPortatil = new ArrayList<>();

@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Monitor extends Common implements Serializable {
 
@@ -16,6 +18,7 @@ public class Monitor extends Common implements Serializable {
 
 	private String tamanho;
 
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "listaMonitor")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 

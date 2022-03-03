@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class UnidadeOrgao implements Serializable {
 
@@ -24,13 +26,16 @@ public class UnidadeOrgao implements Serializable {
 	private String siglaUnidade;
 	private String telefoneRamal;
 
-	@OneToMany(mappedBy = "unidadeOrgaoOrigem", fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "unidadeOrgaoOrigem")
 	private List<Movimentacao> listaMovimentacaoOrigem = new ArrayList<>();
 
-	@OneToMany(mappedBy = "unidadeOrgaoDestino", fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "unidadeOrgaoDestino")
 	private List<Movimentacao> listaMovimentacaoDestino = new ArrayList<>();
 
-	@OneToMany(mappedBy = "unidadeOrgaoLotacao", fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "unidadeOrgaoLotacao")
 	private List<TecnicoAdministrativo> listaTecnicoAdministrativo = new ArrayList<>();
 
 	public UnidadeOrgao() {

@@ -9,11 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Impressora extends Common implements Serializable {
 
 	private static final long serialVersionUID = 2206857014798395920L;
 
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "listaImpressora")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 

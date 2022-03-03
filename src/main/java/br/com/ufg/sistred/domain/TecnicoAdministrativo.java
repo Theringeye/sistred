@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class TecnicoAdministrativo implements Serializable {
@@ -26,15 +29,19 @@ public class TecnicoAdministrativo implements Serializable {
 
 	private String nomeTecnico;
 
-	@ManyToOne
+
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "unidadeOrgaoLotacao_id")
 	private UnidadeOrgao unidadeOrgaoLotacao;
 
 	private String telefoneRamalDepartamentoOrgao;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "responsavelTecnico")
 	private List<Movimentacao> listaMovimentacaoResponsavelTecnico = new ArrayList<>();
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "responsavelAdministrativo")
 	private List<Movimentacao> listaMovimentacaoResponsavelAdministrativo = new ArrayList<>();
 

@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class DispositivoPortatil extends Common implements Serializable {
 
@@ -16,6 +18,7 @@ public class DispositivoPortatil extends Common implements Serializable {
 
 	private String tipo;
 
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "listaDispositivoPortatil")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 

@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Cabo implements Serializable {
 
@@ -28,6 +30,7 @@ public class Cabo implements Serializable {
 	@NotEmpty
 	private String fabricante;
 
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "listaCabo")
 	private List<Movimentacao> listaMovimentacao = new ArrayList<>();
 
